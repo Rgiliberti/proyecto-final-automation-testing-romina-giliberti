@@ -1,0 +1,4 @@
+[
+  {"title": "Reporte de pruebas de la semana", "body": "Se ejecutaron las suites de UI, API y BDD.", "userId": 1},
+  {"title": "Nuevo producto en el catálogo", "body": "Hay que agregar casos de prueba para el carrito.", "userId": 2}
+]
