@@ -1,0 +1,8 @@
+usuario,clave,debe_funcionar,descripcion
+standard_user,secret_sauce,True,usuario estandar valido
+problem_user,secret_sauce,True,usuario con problemas visuales
+performance_glitch_user,secret_sauce,True,usuario con demora
+locked_out_user,secret_sauce,False,usuario bloqueado
+standard_user,clave_incorrecta,False,clave incorrecta
+usuario_inexistente,secret_sauce,False,usuario que no existe
+,,False,campos vacios
