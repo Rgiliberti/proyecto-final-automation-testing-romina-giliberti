@@ -1,0 +1,8 @@
+selenium>=4.6
+pytest>=8
+pytest-html>=4
+pytest-rerunfailures>=14
+requests>=2.31
+faker>=20
+behave>=1.2.6
+behave-html-formatter>=0.9

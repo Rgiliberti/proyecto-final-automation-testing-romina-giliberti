@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+venv/
+
+# Se generan en cada corrida: no se suben (solo las carpetas con .gitkeep)
+reports/*
+!reports/.gitkeep
+logs/*
+!logs/.gitkeep
