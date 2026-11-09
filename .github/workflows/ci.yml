@@ -1,0 +1,57 @@
+# Pipeline de CI: corre todas las pruebas en cada push o pull request a main
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:   # botón "Run workflow" para correrlo a mano desde la pestaña Actions
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8   # si tarda más de 8 minutos, GitHub lo corta y queda en rojo
+    env:
+      HEADLESS: '1'      # Chrome sin ventana (el runner no tiene pantalla)
+      PYTHONUTF8: '1'
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip       # guarda las dependencias entre corridas para instalar más rápido
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Crear carpetas de reportes y logs
+        run: mkdir -p reports logs
+
+      # Primero smoke: si algo básico está roto, el pipeline falla acá y no sigue
+      - name: Pruebas smoke (UI + API + BDD)
+        run: pytest -m smoke --html=reports/smoke.html --self-contained-html
+
+      - name: Resto de las pruebas
+        run: pytest -m "not smoke" --html=reports/report.html --self-contained-html
+
+      # if: always() -> los reportes se suben aunque haya fallado algún test
+      - name: Subir reportes HTML y capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes
+          path: reports/
+          retention-days: 90
+
+      - name: Subir log de la suite
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          path: logs/
+          retention-days: 90
