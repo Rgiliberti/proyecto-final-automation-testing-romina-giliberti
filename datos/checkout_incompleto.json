@@ -1,0 +1,5 @@
+[
+  {"caso": "sin nombre", "nombre": "", "apellido": "Giliberti", "codigo_postal": "1406", "error": "Error: First Name is required"},
+  {"caso": "sin apellido", "nombre": "Romina", "apellido": "", "codigo_postal": "1406", "error": "Error: Last Name is required"},
+  {"caso": "sin codigo postal", "nombre": "Romina", "apellido": "Giliberti", "codigo_postal": "", "error": "Error: Postal Code is required"}
+]
